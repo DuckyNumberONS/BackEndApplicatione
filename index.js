@@ -5,12 +5,16 @@ const app = express();
 // ActorMovie
 const getActorMovie = require("./actor-movies/getActorMovie");
 const getActorMovieById = require("./actor-movies/getActorMovieById");
+const getActorMovieByName = require("./actor-movies/getActorMovieByName");
 const postActorMovie = require("./actor-movies/postActorMovie");
 
 // Movies
 const getMovies = require("./movies/getMovies");
 const getMoviesById = require("./movies/getMoviesById");
 const postMovies = require("./movies/postMovies");
+const putTitleMoviesById = require("./movies/putTitleMoviesById");
+const putDescriptionMovies = require("./movies/putDescriptionMoviesById");
+const getMoviesCategory = require("./movies/getMoviesCategory");
 
 // ListActorMovie
 const getListActorMovieId = require("./list-actor-movies/getListActorMovieId");
@@ -39,8 +43,12 @@ app.use(
   postMovies,
   getMovies,
   getMoviesById,
+  putTitleMoviesById,
+  putDescriptionMovies,
+  getMoviesCategory,
   getActorMovie,
   getActorMovieById,
+  getActorMovieByName,
   postActorMovie,
   getListActorMovieId,
   postListActorMovie,

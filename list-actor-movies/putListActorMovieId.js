@@ -10,31 +10,25 @@ router.put("/putListActorMovie/:id", (req, res) => {
     return;
   }
 
-  const values = data.map(({ idActorMovie, idMovie }) => [
-    idActorMovie,
-    idMovie,
-  ]);
-  console.log(values);
-
   const sql = `
       UPDATE MoviesApp.ActorMovieList
       SET idActorMovie = ?
       WHERE idMovie = ?;
+
     `;
 
-  values.forEach((params) => {
-    db.query(sql, params, (err, results) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log(
-          `Updated idActorMovie: ${params[0]} for idMovie: ${params[1]}`
-        );
-      }
-    });
+  const values = data.map(({ idMovie, idActorMovie }) => [
+    idMovie,
+    idActorMovie,
+  ]);
+  db.query(sql, [values], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(201).json({ message: "Movies Actor edited successfully!" });
+    }
   });
-
-  res.status(200).json({ message: "ActorMovieList updated successfully" });
 });
 
 module.exports = router;
